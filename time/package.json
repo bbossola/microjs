@@ -1,0 +1,8 @@
+{
+  "name": "time-microservice",
+  "author": "Bruno Bossola",
+  "private": true,
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
