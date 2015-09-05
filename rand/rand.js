@@ -3,10 +3,10 @@ var http = require('http');
 var app = express();  
 
 app.get("/", function(request, response) {  
-    var now = new Date().toISOString();
-    response.json({ time: now });
+	var result = Math.round(Math.random() * 100)
+    response.json({ number: result });
 });                                         
 
-app.listen(3002, function() {                       
-    console.log("Time service started on port 3002");
+app.listen(3003, function() {                       
+    console.log("Random service started on port 3003");
 });

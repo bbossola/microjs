@@ -1,29 +1,33 @@
 var express = require("express");  
 var async = require('async');
+var rest = require('unirest');
 var http = require('http');
 var app = express();  
 
+
+
 app.get("/", function(request, response) { 
+    console.log("call received!");
     async.parallel({
-            google: function(callback) {
-                http.get("http://www.google.com", function(res) {
-                    console.log("google done");
-                    callback(null, res.statusCode);
-                })
+            time: function(callback) {
+                rest.get("http://localhost:3002").end(function(res) {
+                        callback(null, res.body);
+                    })
             },
-            yahoo: function(callback) {
-                http.get("http://www.yahoo.com", function(res) {
-                    console.log("yahoo done");
-                    callback(null, res.statusCode);
-                })
+            rand: function(callback) {
+                rest.get("http://localhost:3003").end(function(res) {
+                        callback(null, res.body);
+                    })
             }
         },
         function(err, results) {
             if (!err) {
-                console.log("all done");
-                console.log(results.google);
-                console.log(results.yahoo);
-                response.send("Hello stranger!\n");        
+                response.send(
+                    "Hello stranger!"+
+                    "\n- today is "+results.time.time+
+                    "\n- your lucky number is "+results.rand.number+
+                    "\n");
+                response.send();        
             } else {
                 console.log(err);
                 response.send("Hello stranger!\n");        
