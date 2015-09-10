@@ -9,13 +9,14 @@ app.post("/:name/:port", function(request, response) {  
     var port = request.params.port
 
     var ports = registry[name]
-    if (isNaN(ports)) {
+    if (ports === undefined) {
         ports = []
     }
 
     if (ports.indexOf(port) == -1) {
         ports.push(port)
         registry[name] = ports
+        console.log("Registered service "+name+" at port "+port+" - registry: "+JSON.stringify(registry));
     }
 
     response.status(201);
@@ -28,7 +29,7 @@ app.post("/:name/:port", function(request, response) {  
 app.get("/:name", function(request, response) {  
     var name = request.params.name
     var ports = registry[name]
-    if (isNaN(ports)) {
+    if (ports === undefined) {
         response.status(404);
         response.json({
             "name": name,

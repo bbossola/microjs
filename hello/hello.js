@@ -1,16 +1,16 @@
-var express = require("express");  
+var express = require("express");  
 var async = require('async');
 var rest = require('unirest');
 var http = require('http');
-var app = express();  
+var app = express();  
 
 var port_time;
 var port_rand;
 
-app.get("/", function(request, response) { 
+app.get("/", function(request, response) { 
     console.log("Call received!");
-	console.log("Will call \"time\" at port "+port_time)
-	console.log("Will call \"rand\" at port "+port_rand)
+    console.log("Will call \"time\" at port "+port_time)
+    console.log("Will call \"rand\" at port "+port_rand)
 
     async.parallel({
             time: function(callback) {
@@ -28,19 +28,19 @@ app.get("/", function(request, response) { 
             if (!err) {
                 response.send(
                     "Hello stranger!" +
-                    "\n- today is " + results.time.time +
-                    "\n- your lucky number is " + results.rand.number +
+                    "\n- today is " + uparse(results.time, "time") +
+                    "\n- your lucky number is " + uparse(results.rand, "number") +
                     "\n");
-                response.send();        
+                response.send();        
             } else {
                 console.log(err);
-                response.send("Hello stranger!\n");        
+                response.send("Hello stranger!\n");        
             }
         }
     );
-});                                         
+});                                         
 
-app.listen(3001, function() {                       
+app.listen(3001, function() {                       
     console.log("Hello service started on port 3001");
 });
 
@@ -53,3 +53,7 @@ setInterval(function() {
         port_rand = res.body.port;
     });
 }, 2500);
+
+uparse = function(data, name) {
+    return data === undefined ? undefined : data[name];
+}
