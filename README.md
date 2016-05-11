@@ -7,5 +7,5 @@ The registry will start at port #3000, while the other services (time and rand) 
 
 Using is simple: just checkout the project, go into the microservice folder, hit "npm install ." and then "node xxxx.js" to launch the service (with "rand" and "time" you can specify a port). The last service you should launch is the main "hello" that will contact the registry, call the service and produce the output: simply curl localhost:3001 to see what happens! At any time you can start (or kill) a "rand" or "time" instance, the registy will keep itself updated. You can have a look at it curling localhost:3000
 
-The slides associated to this code can be found on [slideshare](http://www.slideshare.net/bbossola/microservices-the-lean-way-61903873) where you can also read about what are microservices, general antipatterns and some fun facts!
+The slides associated to this code can be found on [slideshare](http://www.slideshare.net/bbossola/microservices-the-lean-way-61903873) where you can also read about what are microservices, general antipatterns and some fun facts! You can also checkout [my blog](https://bbossola.wordpress.com/category/microservices/) if you want to be updated for any other news in regards of my microservices experienc.
 
