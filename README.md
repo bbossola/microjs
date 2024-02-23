@@ -1,6 +1,9 @@
 # microjs
 Examples of microservices written using NodeJS
 
+
+[![security status](https://qa.meterian.io/badge/pb/7c6196f9-2f53-44fa-bdd2-2bb986e5b034/security)](https://qa.meterian.io/projects/?pid=7c6196f9-2f53-44fa-bdd2-2bb986e5b034) [![stability status](https://qa.meterian.io/badge/pb/7c6196f9-2f53-44fa-bdd2-2bb986e5b034/stability)](https://qa.meterian.io/projects/?pid=7c6196f9-2f53-44fa-bdd2-2bb986e5b034) [![licensing status](https://qa.meterian.io/badge/pb/7c6196f9-2f53-44fa-bdd2-2bb986e5b034/licensing)](https://qa.meterian.io/projects/?pid=7c6196f9-2f53-44fa-bdd2-2bb986e5b034)
+
 In this first example we see an implementation of a self-discovery architectural pattern, using a central registry, where microservices enlist themselves while they can get information about others. Please note that this is an extremely simple example: do not use it in production and, generally, use it at your own risk :) (I dropped water on my laptop using it! solution? put your laptop in a drawer full of rice for the night, it works like a charm!)
 
 The registry will start at port #3000, while the other services (time and rand) can be started at different ports: as soon as they are alive, they register themselves on the registry. The registry itself continuosly check that the registered services are still alive and kicking callling a /ping endpoint. The registry will be queried by the "hello" servlice in order to know where he can find the other two, used to produce its final output.
